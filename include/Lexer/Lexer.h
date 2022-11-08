@@ -10,6 +10,10 @@ namespace TotoCompiler::Lexer::Lexer {
         explicit Lexer(std::streambuf *stream): m_stream(stream){
         };
 
+        void printParse();
+
+        void parse();
+
 
     private:
         std::streambuf *m_stream;
