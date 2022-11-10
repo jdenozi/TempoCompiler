@@ -1,13 +1,13 @@
 #ifndef TOTOCOMPILER_LEXER_H
 #define TOTOCOMPILER_LEXER_H
 
+#include <fstream>
 #include "iostream"
 
-namespace TotoCompiler::Lexer::Lexer {
+namespace TotoCompiler::Lexer {
     class Lexer {
     public:
-
-        explicit Lexer(std::streambuf *stream): m_stream(stream){
+        explicit Lexer(std::ifstream &&stream): m_stream(std::move(stream)){
         };
 
         void printParse();
@@ -16,7 +16,7 @@ namespace TotoCompiler::Lexer::Lexer {
 
 
     private:
-        std::streambuf *m_stream;
+        std::ifstream m_stream;
 
     };
 }

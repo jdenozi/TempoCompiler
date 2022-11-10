@@ -7,10 +7,9 @@ namespace TotoCompiler::Lexer {
     }
 
     void Lexer::Lexer::printParse() {
-        for(size_t i = 0; i < m_stream->in_avail(); i++){
-             auto c = m_stream->snextc();
-             std::cout << static_cast<char>(c);
-            m_stream->sputbackc(c);
+        char c;
+        while (m_stream.get(c)) {
+            std::cout << c << std::endl;
         }
     }
 }
