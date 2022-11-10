@@ -6,10 +6,33 @@ project(TotoCompiler
         LANGUAGES CXX
         )
 
-set(CMAKE_CXX_STANDARD 17)
+if(_change_MSVC_flags)
+    # Modify compile flags to change MSVC runtime from /MD to /MT
+    set(_re_match "([\\/\\-]M)D")
+    set(_re_replace "\\1T")
+    string(REGEX REPLACE ${_re_match} ${_re_replace}
+            CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
+    string(REGEX REPLACE ${_re_match} ${_re_replace}
+            CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG}")
+    string(REGEX REPLACE ${_re_match} ${_re_replace}
+            CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE}")
+    string(REGEX REPLACE ${_re_match} ${_re_replace}
+            CMAKE_CXX_FLAGS_MINSIZEREL "${CMAKE_CXX_FLAGS_MINSIZEREL}")
+    string(REGEX REPLACE ${_re_match} ${_re_replace}
+            CMAKE_CXX_FLAGS_RELWITHDEBINFO "${CMAKE_CXX_FLAGS_RELWITHDEBINFO}")
+endif()
+
+set(CMAKE_CXX_STANDARD 20)
 
 if (WIN32)
     set(PLATFORM windows)
+    if(CMAKE_VERSION VERSION_LESS 3.15.0)
+        set(_change_MSVC_flags TRUE)
+    else()
+        # Set MSVC runtime to MultiThreaded (/MT)
+        cmake_policy(SET CMP0091 NEW)
+        set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
+    endif()
 endif(WIN32)
 
 if (UNIX)
@@ -33,7 +56,6 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${BUILD_PATH})
 # Loop over file
 file(GLOB_RECURSE SRC_FILES ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp)
 file(GLOB_RECURSE HEADER_FILES ${CMAKE_CURRENT_SOURCE_DIR}/include/*.h)
-
 
 message(" FILE  ${SRC_FILES}")
 
