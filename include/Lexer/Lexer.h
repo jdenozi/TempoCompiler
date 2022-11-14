@@ -3,6 +3,8 @@
 
 #include <fstream>
 #include "iostream"
+#include "Token.h"
+#include "vector"
 
 namespace TotoCompiler::Lexer {
     /**
@@ -11,16 +13,28 @@ namespace TotoCompiler::Lexer {
      */
     class Lexer {
     public:
-        explicit Lexer(std::ifstream &&stream): m_stream(std::move(stream)){
+        explicit Lexer(std::ifstream &&stream) : m_stream(std::move(stream)) {
         };
 
         void printParse();
 
+        void printTokenArray();
+
+
         void parse();
 
+        /**
+         * This function takes a stringstream object and checks if it has more than one character in it. If it does, it creates
+         * a new Token object with the stringstream's string. If it doesn't, it creates a new Token object with the
+         * stringstream's character
+         *
+         * @param buf a stringstream object that is used to store the characters that make up a token.
+         */
+        void fillTokenArray(std::stringstream &buf, TokenType &token_type);
 
     private:
         std::ifstream m_stream;
+        std::vector<Token *> m_token_array;
 
     };
 }
