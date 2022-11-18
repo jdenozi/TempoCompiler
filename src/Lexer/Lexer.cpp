@@ -1,8 +1,8 @@
 #include <iostream>
 #include <sstream>
-#include "../../include/Lexer/Lexer.h"
+#include "Lexer.h"
 
-namespace TotoCompiler::Lexer {
+namespace TempoCompiler::Lexer {
 
     void Lexer::Lexer::parse() {
         char c;

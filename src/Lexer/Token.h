@@ -1,11 +1,11 @@
 #include <utility>
 #include <ostream>
 
-#ifndef TOTOCOMPILER_TOKEN_H
-#define TOTOCOMPILER_TOKEN_H
+#ifndef TEMPOCOMPILER_TOKEN_H
+#define TEMPOCOMPILER_TOKEN_H
 
 
-namespace TotoCompiler::Lexer {
+namespace TempoCompiler::Lexer {
     enum class TokenType {
         Number,
         Identifier,
@@ -151,5 +151,5 @@ namespace TotoCompiler::Lexer {
     }
 }
 
-#endif //TOTOCOMPILER_TOKEN_H
+#endif //TEMPOCOMPILER_TOKEN_H
 

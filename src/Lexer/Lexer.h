@@ -1,12 +1,12 @@
-#ifndef TOTOCOMPILER_LEXER_H
-#define TOTOCOMPILER_LEXER_H
+#ifndef TEMPOCOMPILER_LEXER_H
+#define TEMPOCOMPILER_LEXER_H
 
 #include <fstream>
 #include "iostream"
 #include "Token.h"
 #include "vector"
 
-namespace TotoCompiler::Lexer {
+namespace TempoCompiler::Lexer {
     /**
      *  it will iterate character by character to do two things: decide where each token starts/stops and what type of token it is.
      *  If the lexer is unable to do this, then it will report an error for an invalid token.
@@ -38,4 +38,4 @@ namespace TotoCompiler::Lexer {
 
     };
 }
-#endif //TOTOCOMPILER_LEXER_H
+#endif //TEMPOCOMPILER_LEXER_H
